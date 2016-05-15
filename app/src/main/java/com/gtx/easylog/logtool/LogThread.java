@@ -28,10 +28,12 @@ public class LogThread extends Thread {
         try {
             while((line = br.readLine()) != null)
             {
+                //line = br.readLine();
                 Message msg = uihandler.obtainMessage(Constants.UPDATE_LOG, line);
                 uihandler.sendMessage(msg);
+                Thread.sleep(100);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -11,11 +11,11 @@ import com.gtx.easylog.logtool.Constants;
  */
 public class LogHandler extends Handler {
 
-    private TextView tw;
+    private TextPack textPack;
 
-    public LogHandler(TextView tw)
+    public LogHandler(TextPack textPack)
     {
-        this.tw = tw;
+        this.textPack = textPack;
     }
 
     @Override
@@ -25,7 +25,9 @@ public class LogHandler extends Handler {
         {
             case Constants.UPDATE_LOG:
             {
-                tw.append((String)msg.obj);
+                textPack.getTextView().append((String) msg.obj + "\n");
+
+                textPack.getScrollView().smoothScrollTo(0, textPack.getTextView().getBottom());
             }
             break;
             default:

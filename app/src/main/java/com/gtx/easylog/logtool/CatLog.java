@@ -10,19 +10,21 @@ import java.io.InputStreamReader;
 public class CatLog implements LogAdapter {
 
     private String cmd;
+    private String[] args;
     private BufferedReader br = null;
     private Process logprocess = null;
 
     public CatLog()
     {
-        cmd = "logcat";
+        cmd = "su -c logcat -v time";
+        args = new String[]{"su", "-c", "\"logcat", "-v", "time\""};
     }
 
     @Override
     public BufferedReader getReader() {
         if(logprocess != null)
         {
-            br = new BufferedReader(new InputStreamReader(logprocess.getInputStream()), 1024);
+            br = new BufferedReader(new InputStreamReader(logprocess.getInputStream()), 8192);
             return br;
         }
         return null;
