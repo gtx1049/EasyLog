@@ -7,15 +7,15 @@ import java.io.InputStreamReader;
 /**
  * Created by Administrator on 2016/5/15.
  */
-public class CatLog implements LogAdapter {
+public class KernerlLog implements LogAdapter {
 
     private String cmd;
     private BufferedReader br = null;
     private Process logprocess = null;
 
-    public CatLog()
+    public KernerlLog()
     {
-        cmd = "su -c logcat -v time";
+        cmd = "su -c cat /proc/kmsg";
     }
 
     @Override

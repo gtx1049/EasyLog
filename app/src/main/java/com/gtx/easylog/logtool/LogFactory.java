@@ -36,6 +36,6 @@ public class LogFactory {
 
     private LogAdapter getKernellog()
     {
-        return new KernelLog();
+        return new KernerlLog();
     }
 }

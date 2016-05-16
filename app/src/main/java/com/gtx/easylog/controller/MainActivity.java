@@ -7,6 +7,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gtx.easylog.R;
+import com.gtx.easylog.logtool.Constants;
 import com.gtx.easylog.logtool.LogThread;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         textPack = new TextPack(logout, scrollView);
 
         myhandler = new LogHandler(textPack);
-        lg = new LogThread(myhandler, "logcat");
+        lg = new LogThread(myhandler, Constants.LOG_CAT);
         lg.start();
     }
 }

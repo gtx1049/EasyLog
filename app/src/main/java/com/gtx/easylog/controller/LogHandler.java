@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 
+import com.gtx.easylog.helper.ColorBuilder;
 import com.gtx.easylog.logtool.Constants;
 
 /**
@@ -25,7 +26,9 @@ public class LogHandler extends Handler {
         {
             case Constants.UPDATE_LOG:
             {
-                textPack.getTextView().append((String) msg.obj + "\n");
+
+                CharSequence line = ColorBuilder.getInstance().colorLog((String) msg.obj);
+                textPack.getTextView().append(line);
 
                 textPack.getScrollView().smoothScrollTo(0, textPack.getTextView().getBottom());
             }
