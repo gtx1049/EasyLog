@@ -9,4 +9,5 @@ public interface LogAdapter {
     public BufferedReader getReader();
     public void startLog();
     public void kill();
+    public String colorLine(String line);
 }

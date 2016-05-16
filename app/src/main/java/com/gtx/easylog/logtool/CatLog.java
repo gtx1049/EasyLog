@@ -1,5 +1,7 @@
 package com.gtx.easylog.logtool;
 
+import com.gtx.easylog.helper.ColorBuilder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,5 +43,10 @@ public class CatLog implements LogAdapter {
     @Override
     public void kill() {
         logprocess.destroy();
+    }
+
+    @Override
+    public String colorLine(String line) {
+        return ColorBuilder.getInstance().colorLog(line);
     }
 }

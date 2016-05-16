@@ -14,6 +14,15 @@ public class Constants {
     public final static String LOG_E_LEVEL = "E/";
     public final static String LOG_A_LEVEL = "assert";
 
+    public final static String KERN_EMERG = "<0>";
+    public final static String KERN_ALERT = "<1>";
+    public final static String KERN_CRIT = "<2>";
+    public final static String KERN_ERR  = "<3>";
+    public final static String KERN_WARNING  = "<4>";
+    public final static String KERN_NOTICE  = "<5>";
+    public final static String KERN_INFO  = "<6>";
+    public final static String KERN_DEBUG  = "<7>";
+
     public final static int MAX_LINE = 200;
 
     public final static int UPDATE_LOG = 0x01;

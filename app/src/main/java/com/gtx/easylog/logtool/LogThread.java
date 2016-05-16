@@ -35,6 +35,7 @@ public class LogThread extends Thread {
         try {
             while(isruning && (line = br.readLine()) != null)
             {
+                line = la.colorLine(line);
                 Message msg = uihandler.obtainMessage(Constants.UPDATE_LOG, line);
                 uihandler.sendMessage(msg);
                 Thread.sleep(100);

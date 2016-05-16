@@ -41,7 +41,7 @@ public class LogHandler extends Handler {
                     linecount = 0;
                 }
 
-                CharSequence line = ColorBuilder.getInstance().colorLog((String) msg.obj);
+                CharSequence line = (String) msg.obj;
                 text.append(line);
                 textPack.getTextView().setText(Html.fromHtml(text.toString()));
 

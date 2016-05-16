@@ -65,6 +65,43 @@ public class ColorBuilder {
         return span.toString();
     }
 
+
+    public String colorKernelLog(String line)
+    {
+        StringBuffer span = new StringBuffer(line);
+
+        String tmp = line.substring(0, 3);
+        String header = tmp;
+
+        if(header.contains(Constants.KERN_DEBUG))
+        {
+            addColor(span, BLACK);
+        }
+        else if(header.contains(Constants.KERN_INFO))
+        {
+            addColor(span, GREEN);
+        }
+        else if(header.contains(Constants.KERN_NOTICE))
+        {
+            addColor(span, BLUE);
+        }
+        else if(header.contains(Constants.KERN_WARNING))
+        {
+            addColor(span, ORANGE);
+        }
+        else if(header.contains(Constants.KERN_ERR))
+        {
+            addColor(span, RED);
+        }
+        else
+        {
+            addColor(span, RED);
+        }
+
+        span.append("<br>");
+        return span.toString();
+    }
+
     private void addColor(StringBuffer sb, String color)
     {
         String token = "<font color=\"#######\">";

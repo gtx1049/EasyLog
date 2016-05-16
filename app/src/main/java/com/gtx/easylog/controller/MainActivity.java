@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         textPack = new TextPack(logout, scrollView);
 
         myhandler = new LogHandler(textPack);
-        lg = new LogThread(myhandler, Constants.LOG_CAT);
+        lg = new LogThread(myhandler, Constants.LOG_KERNEL);
         lg.start();
     }
 
