@@ -34,4 +34,11 @@ public class MainActivity extends AppCompatActivity {
         lg = new LogThread(myhandler, Constants.LOG_CAT);
         lg.start();
     }
+
+    @Override
+    protected  void onDestroy()
+    {
+        super.onDestroy();
+        lg.stopThread();
+    }
 }

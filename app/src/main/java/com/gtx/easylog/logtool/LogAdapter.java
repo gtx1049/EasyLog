@@ -8,4 +8,5 @@ import java.io.BufferedReader;
 public interface LogAdapter {
     public BufferedReader getReader();
     public void startLog();
+    public void kill();
 }

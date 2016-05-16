@@ -33,7 +33,7 @@ public class ColorBuilder {
         return instance;
     }
 
-    public Spanned colorLog(String line)
+    public String colorLog(String line)
     {
         StringBuffer span = new StringBuffer(line);
 
@@ -62,7 +62,7 @@ public class ColorBuilder {
         }
 
         span.append("<br>");
-        return Html.fromHtml(span.toString());
+        return span.toString();
     }
 
     private void addColor(StringBuffer sb, String color)

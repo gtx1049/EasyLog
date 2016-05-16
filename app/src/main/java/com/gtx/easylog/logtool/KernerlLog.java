@@ -36,4 +36,9 @@ public class KernerlLog implements LogAdapter {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void kill() {
+        logprocess.destroy();
+    }
 }

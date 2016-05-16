@@ -14,6 +14,8 @@ public class Constants {
     public final static String LOG_E_LEVEL = "E/";
     public final static String LOG_A_LEVEL = "assert";
 
+    public final static int MAX_LINE = 200;
 
     public final static int UPDATE_LOG = 0x01;
+    public final static int SWITCH_SCROOL = 0x02;
 }

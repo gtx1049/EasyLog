@@ -2,6 +2,7 @@ package com.gtx.easylog.controller;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.gtx.easylog.helper.ColorBuilder;
@@ -13,11 +14,17 @@ import com.gtx.easylog.logtool.Constants;
 public class LogHandler extends Handler {
 
     private TextPack textPack;
+    private boolean isscroll;
 
     public LogHandler(TextPack textPack)
     {
         this.textPack = textPack;
+        isscroll = true;
     }
+
+    private static StringBuffer text = new StringBuffer();
+
+    private static int linecount = 0;
 
     @Override
     public void handleMessage(Message msg)
@@ -26,11 +33,20 @@ public class LogHandler extends Handler {
         {
             case Constants.UPDATE_LOG:
             {
+                linecount++;
+
+                if(linecount == Constants.MAX_LINE)
+                {
+                    text = new StringBuffer(text.substring(text.length() / 2));
+                    linecount = 0;
+                }
 
                 CharSequence line = ColorBuilder.getInstance().colorLog((String) msg.obj);
-                textPack.getTextView().append(line);
+                text.append(line);
+                textPack.getTextView().setText(Html.fromHtml(text.toString()));
 
-                textPack.getScrollView().smoothScrollTo(0, textPack.getTextView().getBottom());
+                if(isscroll)
+                    textPack.getScrollView().smoothScrollTo(0, textPack.getTextView().getBottom());
             }
             break;
             default:

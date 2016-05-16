@@ -32,8 +32,14 @@ public class CatLog implements LogAdapter {
     public void startLog() {
         try {
             logprocess = Runtime.getRuntime().exec(cmd);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void kill() {
+        logprocess.destroy();
     }
 }
