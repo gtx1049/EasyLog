@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".controller.MainActivity">
-    <ScrollView
+    <!--ScrollView
         android:id="@+id/scroller"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -19,5 +19,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/logdata"
             android:text="" />
-    </ScrollView>
+    </ScrollView-->
 </RelativeLayout>

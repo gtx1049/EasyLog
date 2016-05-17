@@ -1,5 +1,6 @@
 package com.gtx.easylog.controller;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,33 +13,32 @@ import com.gtx.easylog.logtool.LogThread;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView logout;
-    private ScrollView scrollView;
-
-    private TextPack textPack;
-
-    private Handler myhandler;
-    private LogThread lg;
+    private LogThread lg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logout = (TextView)findViewById(R.id.logdata);
-        scrollView = (ScrollView)findViewById(R.id.scroller);
+        //logout = (TextView)findViewById(R.id.logdata);
+        //scrollView = (ScrollView)findViewById(R.id.scroller);
 
-        textPack = new TextPack(logout, scrollView);
+        //textPack = new TextPack(logout, scrollView);
 
-        myhandler = new LogHandler(textPack);
-        lg = new LogThread(myhandler, Constants.LOG_KERNEL);
-        lg.start();
+        //myhandler = new LogHandler(textPack);
+        //lg = new LogThread(myhandler, Constants.LOG_KERNEL);
+        //lg.start();
+
+        Intent floatservice = new Intent(MainActivity.this, LogService.class);
+        startService(floatservice);
     }
 
     @Override
     protected  void onDestroy()
     {
         super.onDestroy();
-        lg.stopThread();
+        if(lg != null) {
+            lg.stopThread();
+        }
     }
 }
