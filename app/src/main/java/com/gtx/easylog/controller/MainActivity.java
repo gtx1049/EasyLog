@@ -1,9 +1,15 @@
 package com.gtx.easylog.controller;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent floatservice = new Intent(MainActivity.this, LogService.class);
         startService(floatservice);
+
     }
 
     @Override

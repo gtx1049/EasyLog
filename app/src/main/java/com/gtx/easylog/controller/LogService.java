@@ -2,6 +2,7 @@ package com.gtx.easylog.controller;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -20,12 +21,14 @@ import com.gtx.easylog.logtool.LogThread;
 
 public class LogService extends Service {
 
-    LinearLayout mLayout;
+    //LinearLayout mLayout;
     LayoutParams wmParams;
     WindowManager mWindowManager;
 
-    private TextView logout;
-    private ScrollView scrollView;
+    //private TextView logout;
+    //private ScrollView scrollView;
+
+    OverLayView olView = null;
 
     private TextPack textPack;
 
@@ -46,34 +49,38 @@ public class LogService extends Service {
 
     private void createFloatWindow()
     {
-        wmParams = new WindowManager.LayoutParams();
+        wmParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                PixelFormat.TRANSLUCENT);
+
         mWindowManager = (WindowManager)getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-        wmParams.type = LayoutParams.TYPE_PHONE;
+
+        //wmParams.type = LayoutParams.TYPE_PHONE;
         wmParams.format = PixelFormat.RGBA_8888;
-        wmParams.flags = LayoutParams.FLAG_NOT_FOCUSABLE;
+
         wmParams.gravity = Gravity.LEFT | Gravity.TOP;
-        wmParams.x = 0;
-        wmParams.y = 0;
 
-        wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        LayoutInflater inflater = LayoutInflater.from(getApplication());
-        mLayout = (LinearLayout) inflater.inflate(R.layout.float_layout, null);
 
-        mWindowManager.addView(mLayout, wmParams);
+        wmParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        wmParams.height = WindowManager.LayoutParams.MATCH_PARENT;
 
-        mLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
+
+        olView = new OverLayView(this);
+
+        mWindowManager.addView(olView, wmParams);
+
+        olView.measure(View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
                 .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 
-        logout = (TextView)mLayout.findViewById(R.id.logdata);
-        scrollView = (ScrollView)mLayout.findViewById(R.id.scroller);
-
-        textPack = new TextPack(logout, scrollView);
+        textPack = new TextPack(olView.getTextView(), olView.getScrollView());
 
         myhandler = new LogHandler(textPack);
-        lg = new LogThread(myhandler, Constants.LOG_KERNEL);
+        lg = new LogThread(myhandler, Constants.LOG_CAT);
         lg.start();
     }
 
@@ -87,9 +94,9 @@ public class LogService extends Service {
     public void onDestroy()
     {
         super.onDestroy();
-        if(mLayout != null)
+        if(olView != null)
         {
-            mWindowManager.removeView(mLayout);
+            mWindowManager.removeView(olView);
             if(lg != null) {
                 lg.stopThread();
             }
